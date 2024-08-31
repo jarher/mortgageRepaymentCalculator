@@ -14,11 +14,11 @@ export const Mortgage = () => {
   return (
     <div className="mortgage__container">
       <FullScreenSection>
-        <Row>
-          <Col>
+        <Row className="align-items-end">
+          <Col xs={12} sm={9}>
             <h1>Mortgage Calculator</h1>
           </Col>
-          <Col>
+          <Col xs={12} sm={3}>
             <span className="mortgage__reset-form" onClick={handleReset}>
               Clear All
             </span>

@@ -3,6 +3,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
 import { useFormContext } from "../../context/appContext";
+import { motion } from "framer-motion";
 
 const monthlyRepayments = (loanAmount, mortgageTerm, interestRate) => {
   const numberOfPayments = mortgageTerm * 12;
@@ -16,7 +17,7 @@ const monthlyRepayments = (loanAmount, mortgageTerm, interestRate) => {
   //   const
   // }
 
-  const resultDenominator = (1 - resultPower) / resultPower;
+  const resultDenominator = (resultPower - 1) / resultPower;
 
   const mortgagePayments =
     (loanAmount * (yearlyInterestRate / 12)) / resultDenominator;
@@ -33,9 +34,9 @@ export const ResultCalculated = () => {
   useEffect(() => {
     if (mortgageType === "repayment") {
       const monthlyRepaymentResult = monthlyRepayments(
-        mortgageAmountInput,
-        mortgageTerm,
-        interestRate
+        Number(mortgageAmountInput),
+        Number(mortgageTerm),
+        Number(interestRate)
       );
       setMonthlyRepayment(monthlyRepaymentResult.toFixed(2));
       setTotalRepay((monthlyRepaymentResult * (mortgageTerm * 12)).toFixed(2));
@@ -43,23 +44,28 @@ export const ResultCalculated = () => {
   }, [formData]);
 
   return (
-    <>
-      <h2 className="result-calculated__title">Your results</h2>
-      <p className="result-calculated__paragraph">
-        Your result are shown below based on the information you provided. To
-        adjust the result, edit the form and click "Calculate repayments" again.
-      </p>
-      <div className="result-calculated__results-wrapper">
-        <div className="monthly-repayments__wrapper">
-          <span>Your monthly repayments</span>
-          <span className="monthly-repayments__result">{monthlyRepayment}</span>
-        </div>
-        <hr />
-        <div className="result-repay__wrapper">
-          <span>Total you&apos;ll repay over the term</span>
-          <span className="result-repay__total">{totalRepay}</span>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <div className="result-calculated-main-wrapper">
+        <h2>Your results</h2>
+        <p className="result-calculated__paragraph mt-3">
+          Your result are shown below based on the information you provided. To
+          adjust the result, edit the form and click "Calculate repayments"
+          again.
+        </p>
+        <div className="result-calculated__results-wrapper p-3 mt-4 rounded-2 ">
+          <div className="monthly-repayments__wrapper d-flex flex-column pt-2">
+            <span>Your monthly repayments</span>
+            <span className="monthly-repayments__result">
+              £{monthlyRepayment}
+            </span>
+          </div>
+          <hr />
+          <div className="result-repay__wrapper d-flex flex-column pt-2">
+            <span>Total you&apos;ll repay over the term</span>
+            <span className="result-repay__total mt-2">£{totalRepay}</span>
+          </div>
         </div>
       </div>
-    </>
+    </motion.div>
   );
 };

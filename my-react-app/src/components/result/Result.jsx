@@ -6,8 +6,9 @@ import { ResultEmpty } from "./ResultEmpty.jsx";
 
 export const Result = () => {
   const { isFormFilled } = useFormContext();
+
   return (
-    <div className="result__container">
+    <div className="result__container d-flex align-items-center justify-content-center">
       <FullScreenSection>
         {isFormFilled ? <ResultCalculated /> : <ResultEmpty />}
       </FullScreenSection>

@@ -1,0 +1,87 @@
+.form-control,
+.input-group-text,
+.form-check-label {
+  font-family: "PlusJakartaSans-Bold", sans-serif !important;
+}
+.form-control-wrapper,
+.form-control,
+.form-check {
+  cursor: pointer;
+}
+.form-control,
+.input-group-text {
+  border: none;
+  border-radius: 0;
+}
+.form-control-wrapper,
+.input-group-text {
+  transition: all 0.2s ease-in-out;
+}
+.form-control-wrapper {
+  border: 1px solid $Slate-300;
+  overflow: hidden;
+
+  &:hover {
+    border-color: $Slate-700;
+  }
+}
+.form-control {
+  color: $Slate-900;
+}
+
+.form-control .form-label {
+  font-family: "PlusJakartaSans-SemiBold", sans-serif !important;
+  color: $Slate-500;
+}
+fieldset .form-control-wrapper {
+  &:hover {
+    border-color: $Pale-Lime;
+  }
+}
+.input-group-text {
+  color: $Slate-500;
+  background-color: $Slate-100;
+}
+.form-check-label {
+  width: 100%;
+  color: $Slate-700;
+}
+.form-check-input:checked {
+  background-color: $Pale-Lime;
+  border-color: $Pale-Lime;
+}
+form button {
+  background-color: $Lime !important;
+  color: $Slate-900 !important;
+  border: none !important;
+  font-family: "PlusJakartaSans-Bold", sans-serif !important;
+  &:hover {
+    background-color: $Pale-Lime !important;
+  }
+}
+.form-control-active {
+  border-color: $Pale-Lime !important;
+  .input-group-text {
+    background-color: $Lime;
+    color: $Slate-700;
+  }
+}
+.radio-check-active {
+  background-color: hsl(60, 72%, 93%);
+  border-color: $Pale-Lime !important;
+}
+.form-control-invalid {
+  border-color: $Red !important;
+  .input-group-text {
+    background-color: $Red !important;
+    color: $White;
+  }
+}
+.form-error {
+  color: $Red;
+}
+@media screen and (min-width: 1024px) {
+  form {
+    margin-top: 3rem;
+  }
+}

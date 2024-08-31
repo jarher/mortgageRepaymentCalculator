@@ -1,68 +1,218 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.mortgage__container {
+  flex-basis: 50%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+.mortgage__container h1 {
+  font-family: "PlusJakartaSans-Bold", sans-serif !important;
+  color: hsl(202, 55%, 16%);
+  font-size: 1.5rem;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.mortgage__reset-form {
+  font-family: "PlusJakartaSans-Bold", sans-serif !important;
+  border-bottom: 1px solid hsl(203, 41%, 72%);
+  color: hsl(200, 26%, 54%);
   cursor: pointer;
-  transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.mortgage__reset-form:hover {
+  color: hsl(202, 55%, 16%);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+@media screen and (min-width: 768px) {
+  .mortgage__container h1 {
+    font-size: 1.2rem !important;
   }
 }
+.form-control,
+.input-group-text,
+.form-check-label {
+  font-family: "PlusJakartaSans-Bold", sans-serif !important;
+}
+
+.form-control-wrapper,
+.form-control,
+.form-check {
+  cursor: pointer;
+}
+
+.form-control,
+.input-group-text {
+  border: none;
+  border-radius: 0;
+}
+
+.form-control-wrapper,
+.input-group-text {
+  transition: all 0.2s ease-in-out;
+}
+
+.form-control-wrapper {
+  border: 1px solid hsl(203, 41%, 72%);
+  overflow: hidden;
+}
+.form-control-wrapper:hover {
+  border-color: hsl(200, 24%, 40%);
+}
+
+.form-control {
+  color: hsl(202, 55%, 16%);
+}
+
+.form-control .form-label {
+  font-family: "PlusJakartaSans-SemiBold", sans-serif !important;
+  color: hsl(200, 26%, 54%);
+}
+
+fieldset .form-control-wrapper:hover {
+  border-color: hsl(62, 72%, 76%);
+}
+
+.input-group-text {
+  color: hsl(200, 26%, 54%);
+  background-color: hsl(202, 86%, 94%);
+}
+
+.form-check-label {
+  width: 100%;
+  color: hsl(200, 24%, 40%);
+}
+
+.form-check-input:checked {
+  background-color: hsl(62, 72%, 76%);
+  border-color: hsl(62, 72%, 76%);
+}
+
+form button {
+  background-color: hsl(61, 70%, 52%) !important;
+  color: hsl(202, 55%, 16%) !important;
+  border: none !important;
+  font-family: "PlusJakartaSans-Bold", sans-serif !important;
+}
+form button:hover {
+  background-color: hsl(62, 72%, 76%) !important;
+}
+
+.form-control-active {
+  border-color: hsl(62, 72%, 76%) !important;
+}
+.form-control-active .input-group-text {
+  background-color: hsl(61, 70%, 52%);
+  color: hsl(200, 24%, 40%);
+}
+
+.radio-check-active {
+  background-color: hsl(60, 72%, 93%);
+  border-color: hsl(62, 72%, 76%) !important;
+}
+
+.form-control-invalid {
+  border-color: hsl(4, 69%, 50%) !important;
+}
+.form-control-invalid .input-group-text {
+  background-color: hsl(4, 69%, 50%) !important;
+  color: hsl(0, 0%, 100%);
+}
+
+.form-error {
+  color: hsl(4, 69%, 50%);
+}
+
+@media screen and (min-width: 1024px) {
+  form {
+    margin-top: 3rem;
+  }
+}
+.result__container {
+  background-color: hsl(202, 55%, 16%);
+  font-family: "PlusJakartaSans-Medium", sans-serif;
+  color: hsl(0, 0%, 100%);
+  flex-basis: 50%;
+}
+
+.result-empty__paragraph,
+.result-calculated__paragraph,
+.monthly-repayments__wrapper,
+.result-repay__wrapper {
+  color: hsl(203, 41%, 72%);
+}
+
+.result__container h2 {
+  font-size: 1.2rem !important;
+}
+
+.result__container img {
+  width: 11.25rem;
+}
+
+.result-calculated__results-wrapper {
+  background-color: hsla(0, 0%, 0%, 0.301);
+  border-top: 3px solid hsl(61, 70%, 52%);
+}
+
+hr {
+  border: 1px solid hsl(203, 41%, 72%);
+}
+
+.result-empty__paragraph {
+  font-size: 0.95rem;
+}
+
+.result-empty__title {
+  font-size: 1.2rem;
+}
+
+.monthly-repayments__result {
+  font-size: 3rem;
+  color: hsl(61, 70%, 52%);
+}
+
+.result-repay__total {
+  color: hsl(0, 0%, 100%);
+  font-size: 1.6rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .result__container {
+    border-bottom-left-radius: 20%;
+  }
+  .result-calculated-main-wrapper {
+    height: 512px;
+  }
+}
+@font-face {
+  font-family: "PlusJakartaSans-Bold";
+  src: url("./assets/fonts/static/PlusJakartaSans-Bold.ttf");
+}
+@font-face {
+  font-family: "PlusJakartaSans-Medium";
+  src: url("./assets/fonts/static/PlusJakartaSans-Medium.ttf");
+}
+body {
+  background-color: hsl(202, 86%, 94%);
+}
+
+main {
+  max-width: 1000px;
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.container {
+  padding: 1.5625rem;
+}
+
+@media screen and (min-width: 768px) {
+  #root {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    padding: 2.5rem;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

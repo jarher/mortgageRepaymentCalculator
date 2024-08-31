@@ -1,0 +1,37 @@
+@import "colors";
+@import "./components/mortgage/mortgage.scss";
+@import "./components/form/formComponent.scss";
+@import "./components/result/result.scss";
+
+@font-face {
+  font-family: "PlusJakartaSans-Bold";
+  src: url("./assets/fonts/static/PlusJakartaSans-Bold.ttf");
+}
+@font-face {
+  font-family: "PlusJakartaSans-Medium";
+  src: url("./assets/fonts/static/PlusJakartaSans-Medium.ttf");
+}
+
+body {
+  background-color: $Slate-100;
+}
+main {
+  max-width: 1000px;
+  background-color: $White;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.container {
+  padding: 1.5625rem;
+}
+@media screen and (min-width: 768px) {
+  #root {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    padding: 2.5rem;
+  }
+}

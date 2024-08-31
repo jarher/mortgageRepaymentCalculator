@@ -1,0 +1,23 @@
+.mortgage__container {
+  flex-basis: 50%;
+}
+.mortgage__container h1 {
+  font-family: "PlusJakartaSans-Bold", sans-serif !important;
+  color: $Slate-900;
+  font-size: 1.5rem;
+  margin: 0;
+}
+.mortgage__reset-form {
+  font-family: "PlusJakartaSans-Bold", sans-serif !important;
+  border-bottom: 1px solid $Slate-300;
+  color: $Slate-500;
+  cursor: pointer;
+  &:hover {
+    color: $Slate-900;
+  }
+}
+@media screen and (min-width: 768px) {
+  .mortgage__container h1 {
+    font-size: 1.2rem !important;
+  }
+}

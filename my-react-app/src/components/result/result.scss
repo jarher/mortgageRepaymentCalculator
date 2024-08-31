@@ -1,0 +1,48 @@
+.result__container {
+  background-color: $Slate-900;
+  font-family: "PlusJakartaSans-Medium", sans-serif;
+  color: $White;
+  flex-basis: 50%;
+}
+.result-empty__paragraph,
+.result-calculated__paragraph,
+.monthly-repayments__wrapper,
+.result-repay__wrapper {
+  color: $Slate-300;
+}
+
+.result__container h2 {
+  font-size: 1.2rem !important;
+}
+.result__container img {
+  width: 11.25rem;
+}
+.result-calculated__results-wrapper {
+  background-color: hsla(0, 0%, 0%, 0.301);
+  border-top: 3px solid $Lime;
+}
+hr {
+  border: 1px solid $Slate-300;
+}
+.result-empty__paragraph {
+  font-size: 0.95rem;
+}
+.result-empty__title {
+  font-size: 1.2rem;
+}
+.monthly-repayments__result {
+  font-size: 3rem;
+  color: $Lime;
+}
+.result-repay__total {
+  color: $White;
+  font-size: 1.6rem;
+}
+@media screen and (min-width: 1024px) {
+  .result__container {
+    border-bottom-left-radius: 20%;
+  }
+  .result-calculated-main-wrapper {
+    height: 512px;
+  }
+}
