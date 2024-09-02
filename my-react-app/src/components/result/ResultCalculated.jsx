@@ -24,23 +24,47 @@ const monthlyRepayments = (loanAmount, mortgageTerm, interestRate) => {
   return mortgagePayments;
 };
 
+const mortgageInterest = (loanAmount, mortgageTerm, interestRate) => {
+  return loanAmount * (interestRate / 100) * mortgageTerm;
+};
+
+const formatCurrency = (value) => {
+  const result = new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP",
+    maximumSignificantDigits: 10,
+  }).format(value.toFixed(2));
+  return result;
+};
+
 export const ResultCalculated = () => {
   const [monthlyRepayment, setMonthlyRepayment] = useState(0);
   const [totalRepay, setTotalRepay] = useState(0);
+  const [totalInterest, setTotalInterest] = useState(0);
   const { formData } = useFormContext();
   const { mortgageAmountInput, mortgageTerm, interestRate, mortgageType } =
     formData;
 
   useEffect(() => {
+    const mortgageAmount = Number(mortgageAmountInput);
+    const mortgageTrm = Number(mortgageTerm);
+    const interest = Number(interestRate);
+
     if (mortgageType === "repayment") {
       const monthlyRepaymentResult = monthlyRepayments(
-        Number(mortgageAmountInput),
-        Number(mortgageTerm),
-        Number(interestRate)
+        mortgageAmount,
+        mortgageTrm,
+        interest
       );
-      setMonthlyRepayment(monthlyRepaymentResult.toFixed(2));
-      setTotalRepay((monthlyRepaymentResult * (mortgageTerm * 12)).toFixed(2));
+      setMonthlyRepayment(formatCurrency(monthlyRepaymentResult));
+      setTotalRepay(
+        formatCurrency(monthlyRepaymentResult * (mortgageTerm * 12))
+      );
+      return;
     }
+    setTotalInterest(
+      formatCurrency(mortgageInterest(mortgageAmount, mortgageTrm, interest))
+    );
   }, [formData]);
 
   return (
@@ -53,17 +77,28 @@ export const ResultCalculated = () => {
           again.
         </p>
         <div className="result-calculated__results-wrapper p-3 mt-4 rounded-2 ">
-          <div className="monthly-repayments__wrapper d-flex flex-column pt-2">
-            <span>Your monthly repayments</span>
-            <span className="monthly-repayments__result">
-              £{monthlyRepayment}
-            </span>
-          </div>
-          <hr />
-          <div className="result-repay__wrapper d-flex flex-column pt-2">
-            <span>Total you&apos;ll repay over the term</span>
-            <span className="result-repay__total mt-2">£{totalRepay}</span>
-          </div>
+          {mortgageType === "repayment" ? (
+            <>
+              <div className="monthly-repayments__wrapper d-flex flex-column pt-2">
+                <span>Your monthly repayments</span>
+                <span className="monthly-repayments__result">
+                  {monthlyRepayment}
+                </span>
+              </div>
+              <hr />
+              <div className="result-repay__wrapper d-flex flex-column pt-2">
+                <span>Total you&apos;ll repay over the term</span>
+                <span className="result-repay__total mt-2">{totalRepay}</span>
+              </div>
+            </>
+          ) : (
+            <div className="monthly-repayments__wrapper d-flex flex-column pt-2">
+              <span>Your total Interest</span>
+              <span className="monthly-repayments__result">
+                {totalInterest}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </motion.div>

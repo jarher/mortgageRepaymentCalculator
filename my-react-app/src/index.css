@@ -79,8 +79,8 @@ fieldset .form-control-wrapper:hover {
 }
 
 .form-check-input:checked {
-  background-color: hsl(62, 72%, 76%);
-  border-color: hsl(62, 72%, 76%);
+  background-color: hsl(61, 70%, 52%);
+  border-color: hsl(61, 70%, 52%);
 }
 
 form button {
