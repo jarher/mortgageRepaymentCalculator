@@ -1,14 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
 import IconEmpty from "../../assets/images/illustration-empty.svg";
-import { motion } from "framer-motion";
+import { FramerMotionWrapper } from "./FramerMotionWrapper";
 
 export const ResultEmpty = () => {
+  const framerMotionProps = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    className: "h-100 d-flex align-items-center justify-content-center",
+  };
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="h-100 d-flex align-items-center justify-content-center"
-    >
+    <FramerMotionWrapper props={framerMotionProps}>
       <div className="text-center">
         <img src={IconEmpty} alt="illustration empty icon" />
         <span className="result-empty__title d-block">Results shown here</span>
@@ -17,6 +18,6 @@ export const ResultEmpty = () => {
           monthly repayments would be
         </p>
       </div>
-    </motion.div>
+    </FramerMotionWrapper>
   );
 };

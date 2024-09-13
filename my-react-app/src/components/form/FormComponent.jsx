@@ -65,13 +65,14 @@ export const FormComponent = () => {
   useEffect(() => {
     if (isClearForm) {
       formik.resetForm();
-      repaymentRadioRef.current.checked = false;
-      interestRadioRef.current.checked = false;
+      [repaymentRadioRef, interestRadioRef].forEach(
+        (element) => (element.current.checked = false)
+      );
       clearForm(false);
     }
   }, [isClearForm]);
 
-  const formGroupsElements = [
+  const formGroupElements = [
     {
       hasClassNameMy3: true,
       xs: 12,
@@ -139,7 +140,7 @@ export const FormComponent = () => {
   return (
     <Form noValidate onSubmit={formik.handleSubmit}>
       <Row>
-        {formGroupsElements.map((props, i) => {
+        {formGroupElements.map((props, i) => {
           const formGroupProps = {
             props,
             formik,

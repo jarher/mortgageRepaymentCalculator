@@ -3,7 +3,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
 import { useFormContext } from "../../context/appContext";
-import { motion } from "framer-motion";
+import { FramerMotionWrapper } from "./FramerMotionWrapper";
 
 const monthlyRepayments = (loanAmount, mortgageTerm, interestRate) => {
   const numberOfPayments = mortgageTerm * 12;
@@ -12,10 +12,6 @@ const monthlyRepayments = (loanAmount, mortgageTerm, interestRate) => {
     (12 + yearlyInterestRate) / 12,
     numberOfPayments
   );
-
-  // const interestRepayment = (interestRate) => {
-  //   const
-  // }
 
   const resultDenominator = (resultPower - 1) / resultPower;
 
@@ -38,9 +34,11 @@ const formatCurrency = (value) => {
 };
 
 export const ResultCalculated = () => {
-  const [monthlyRepayment, setMonthlyRepayment] = useState(0);
-  const [totalRepay, setTotalRepay] = useState(0);
-  const [totalInterest, setTotalInterest] = useState(0);
+  const [resultStates, setResultStates] = useState({
+    monthlyRepayment: 0,
+    totalRepay: 0,
+    totalInterest: 0,
+  });
   const { formData } = useFormContext();
   const { mortgageAmountInput, mortgageTerm, interestRate, mortgageType } =
     formData;
@@ -56,19 +54,35 @@ export const ResultCalculated = () => {
         mortgageTrm,
         interest
       );
-      setMonthlyRepayment(formatCurrency(monthlyRepaymentResult));
-      setTotalRepay(
-        formatCurrency(monthlyRepaymentResult * (mortgageTerm * 12))
-      );
+      // set monthlyRepayment and totalRepay value
+      setResultStates((prev) => {
+        return {
+          ...prev,
+          monthlyRepayment: formatCurrency(monthlyRepaymentResult),
+          totalRepay: formatCurrency(
+            monthlyRepaymentResult * (mortgageTerm * 12)
+          ),
+        };
+      });
       return;
     }
-    setTotalInterest(
-      formatCurrency(mortgageInterest(mortgageAmount, mortgageTrm, interest))
-    );
+    //set mortgage interest value
+    setResultStates((prev) => {
+      return {
+        ...prev,
+        totalInterest: formatCurrency(
+          mortgageInterest(mortgageAmount, mortgageTrm, interest)
+        ),
+      };
+    });
   }, [formData]);
 
+  const framerMotionProps = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+  };
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <FramerMotionWrapper props={framerMotionProps}>
       <div className="result-calculated-main-wrapper">
         <h2>Your results</h2>
         <p className="result-calculated__paragraph mt-3">
@@ -78,29 +92,39 @@ export const ResultCalculated = () => {
         </p>
         <div className="result-calculated__results-wrapper p-3 mt-4 rounded-2 ">
           {mortgageType === "repayment" ? (
-            <>
-              <div className="monthly-repayments__wrapper d-flex flex-column pt-2">
-                <span>Your monthly repayments</span>
-                <span className="monthly-repayments__result">
-                  {monthlyRepayment}
-                </span>
-              </div>
-              <hr />
-              <div className="result-repay__wrapper d-flex flex-column pt-2">
-                <span>Total you&apos;ll repay over the term</span>
-                <span className="result-repay__total mt-2">{totalRepay}</span>
-              </div>
-            </>
+            <TotalRepaymentComponent state={resultStates} />
           ) : (
-            <div className="monthly-repayments__wrapper d-flex flex-column pt-2">
-              <span>Your total Interest</span>
-              <span className="monthly-repayments__result">
-                {totalInterest}
-              </span>
-            </div>
+            <TotalInterestComponent state={resultStates} />
           )}
         </div>
       </div>
-    </motion.div>
+    </FramerMotionWrapper>
+  );
+};
+
+const TotalRepaymentComponent = ({ state }) => {
+  return (
+    <>
+      <div className="monthly-repayments__wrapper d-flex flex-column pt-2">
+        <span>Your monthly repayments</span>
+        <span className="monthly-repayments__result">
+          {state.monthlyRepayment}
+        </span>
+      </div>
+      <hr />
+      <div className="result-repay__wrapper d-flex flex-column pt-2">
+        <span>Total you&apos;ll repay over the term</span>
+        <span className="result-repay__total mt-2">{state.totalRepay}</span>
+      </div>
+    </>
+  );
+};
+
+const TotalInterestComponent = ({ state }) => {
+  return (
+    <div className="monthly-repayments__wrapper d-flex flex-column pt-2">
+      <span>Your total Interest</span>
+      <span className="monthly-repayments__result">{state.totalInterest}</span>
+    </div>
   );
 };
