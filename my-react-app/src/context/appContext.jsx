@@ -3,17 +3,19 @@
 /* eslint-disable no-unused-vars */
 
 import { createContext, useContext, useState } from "react";
+import Col from "react-bootstrap/esm/Col";
+import Row from "react-bootstrap/esm/Row";
 
-const formContext = createContext(null);
+const AppContext = createContext(null);
 
-export const FormProvider = ({ children }) => {
+export const AppProvider = ({ children }) => {
   const [state, setState] = useState({
     isClearForm: false,
     isFormFilled: false,
     formData: null,
   });
   return (
-    <formContext.Provider
+    <AppContext.Provider
       value={{
         ...state,
         clearForm: (value) =>
@@ -38,11 +40,13 @@ export const FormProvider = ({ children }) => {
             };
           });
         },
+        Col,
+        Row,
       }}
     >
       {children}
-    </formContext.Provider>
+    </AppContext.Provider>
   );
 };
 
-export const useFormContext = () => useContext(formContext);
+export const UseAppContext = () => useContext(AppContext);

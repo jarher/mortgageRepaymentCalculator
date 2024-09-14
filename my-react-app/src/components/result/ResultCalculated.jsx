@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
-import { useFormContext } from "../../context/appContext";
+import { UseAppContext } from "../../context/appContext";
 import { FramerMotionWrapper } from "./FramerMotionWrapper";
 
 const monthlyRepayments = (loanAmount, mortgageTerm, interestRate) => {
@@ -39,14 +39,14 @@ export const ResultCalculated = () => {
     totalRepay: 0,
     totalInterest: 0,
   });
-  const { formData } = useFormContext();
+  const { formData } = UseAppContext();
   const { mortgageAmountInput, mortgageTerm, interestRate, mortgageType } =
     formData;
 
   useEffect(() => {
-    const mortgageAmount = Number(mortgageAmountInput);
-    const mortgageTrm = Number(mortgageTerm);
-    const interest = Number(interestRate);
+    const mortgageAmount = Number(mortgageAmountInput.replace(",", ""));
+    const mortgageTrm = Number(mortgageTerm.replace(",", ""));
+    const interest = Number(interestRate.replace(",", ""));
 
     if (mortgageType === "repayment") {
       const monthlyRepaymentResult = monthlyRepayments(
@@ -81,6 +81,7 @@ export const ResultCalculated = () => {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
   };
+
   return (
     <FramerMotionWrapper props={framerMotionProps}>
       <div className="result-calculated-main-wrapper">
@@ -90,7 +91,7 @@ export const ResultCalculated = () => {
           adjust the result, edit the form and click "Calculate repayments"
           again.
         </p>
-        <div className="result-calculated__results-wrapper p-3 mt-4 rounded-2 ">
+        <div className="result-calculated__results-wrapper p-3 mt-5 rounded-2 ">
           {mortgageType === "repayment" ? (
             <TotalRepaymentComponent state={resultStates} />
           ) : (
