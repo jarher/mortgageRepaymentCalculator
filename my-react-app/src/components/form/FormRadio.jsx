@@ -31,34 +31,26 @@ export const FormRadio = () => {
           Mortgage Type
         </Form.Label>
         {formRadioProps.map((props) => {
-          const radioProps = {
-            props,
-            formik,
-            Form,
-            Col,
-          };
-          return <Radio {...radioProps} key={`${props.label}`} />;
+          return (
+            <>
+              <Col xs={12} className={props.className}>
+                <Form.Check
+                  type="radio"
+                  label={props.label}
+                  name="mortgageType"
+                  id={props.id}
+                  onChange={formik.handleChange}
+                  value={props.value}
+                  ref={props.refElement}
+                />
+              </Col>
+            </>
+          );
         })}
       </Form.Group>
       <div className="form-error mt-2 mb-md-3">
         {formik.errors.mortgageType}
       </div>
     </fieldset>
-  );
-};
-
-const Radio = ({ props, formik, Form, Col }) => {
-  return (
-    <Col xs={12} className={props.className}>
-      <Form.Check
-        type="radio"
-        label={props.label}
-        name="mortgageType"
-        id={props.id}
-        onChange={formik.handleChange}
-        value={props.value}
-        ref={props.refElement}
-      />
-    </Col>
   );
 };

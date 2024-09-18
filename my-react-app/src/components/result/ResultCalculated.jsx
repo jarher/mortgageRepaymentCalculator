@@ -20,17 +20,16 @@ const monthlyRepayments = (loanAmount, mortgageTerm, interestRate) => {
   return mortgagePayments;
 };
 
-const mortgageInterest = (loanAmount, mortgageTerm, interestRate) => {
-  return loanAmount * (interestRate / 100) * mortgageTerm;
-};
+const mortgageInterest = (loanAmount, mortgageTerm, interestRate) =>
+  loanAmount * (interestRate / 100) * mortgageTerm;
 
 const formatCurrency = (value) => {
-  const result = new Intl.NumberFormat("en-GB", {
+  //enables numeric formatting according to the language.
+  return new Intl.NumberFormat("en-GB", {
     style: "currency",
     currency: "GBP",
     maximumSignificantDigits: 10,
   }).format(value.toFixed(2));
-  return result;
 };
 
 export const ResultCalculated = () => {
@@ -44,9 +43,11 @@ export const ResultCalculated = () => {
     formData;
 
   useEffect(() => {
-    const mortgageAmount = Number(mortgageAmountInput.replace(",", ""));
-    const mortgageTrm = Number(mortgageTerm.replace(",", ""));
-    const interest = Number(interestRate.replace(",", ""));
+    const [mortgageAmount, mortgageTrm, interest] = [
+      mortgageAmountInput,
+      mortgageTerm,
+      interestRate,
+    ].map((element) => Number(element.replace(",", "")));
 
     if (mortgageType === "repayment") {
       const monthlyRepaymentResult = monthlyRepayments(
@@ -77,13 +78,13 @@ export const ResultCalculated = () => {
     });
   }, [formData]);
 
-  const framerMotionProps = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-  };
-
   return (
-    <FramerMotionWrapper props={framerMotionProps}>
+    <FramerMotionWrapper
+      props={{
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+      }}
+    >
       <div className="result-calculated-main-wrapper">
         <h2>Your results</h2>
         <p className="result-calculated__paragraph mt-3">

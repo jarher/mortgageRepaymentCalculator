@@ -33,23 +33,30 @@
   font-family: "PlusJakartaSans-SemiBold", sans-serif !important;
   color: $Slate-500;
 }
+
 fieldset .form-control-wrapper {
   &:hover {
     border-color: $Pale-Lime;
   }
 }
+
 .input-group-text {
   color: $Slate-500;
   background-color: $Slate-100;
 }
+
 .form-check-label {
   width: 100%;
   color: $Slate-700;
+}
+.form-check-input {
+  background-color: transparent;
 }
 .form-check-input:checked {
   background-color: $Lime;
   border-color: $Lime;
 }
+
 form button {
   background-color: $Lime !important;
   color: $Slate-900 !important;
@@ -59,6 +66,7 @@ form button {
     background-color: $Pale-Lime !important;
   }
 }
+
 .form-control-active {
   border-color: $Pale-Lime !important;
   .input-group-text {
@@ -66,10 +74,12 @@ form button {
     color: $Slate-700;
   }
 }
+
 .radio-check-active {
   background-color: hsl(60, 72%, 93%);
   border-color: $Pale-Lime !important;
 }
+
 .form-control-invalid {
   border-color: $Red !important;
   .input-group-text {
@@ -77,9 +87,11 @@ form button {
     color: $White;
   }
 }
+
 .form-error {
   color: $Red;
 }
+
 @media screen and (min-width: 1024px) {
   form {
     margin-top: 3rem;
